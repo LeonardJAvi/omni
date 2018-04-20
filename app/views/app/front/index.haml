@@ -1,0 +1,176 @@
+!!!
+%html{:lang => "en"}
+  = render 'app/partials/head'
+  
+  %body
+    %header
+      %nav.navbar.navbar-default.navbar-fixed-top.visible-sm.visible-md.visible-lg
+        .container
+          .container-fluid
+            .navbar-header{:style => "right: 80%;"}
+              %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand{:href => "https://www.omnitours.com.co/"}
+                %img#dnn_dnnLOGO_imgLogo{:alt => "::: OMNI TOURS COLOMBIA ::: Pone a Colombia en sus manos", :src => "assets/img/omnitours.png", :style => ""}/
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+              %ul#list-price.nav.navbar-nav
+                %li
+                  %p
+                    %img{:src => "assets/img/ic_telefono.png"}>/
+                    (+571) 756 2614 / 805 6000
+                  %p
+                    %img{:src => "assets/img/ic_whatsapp.png"}>/
+                    (+57) 310 306 1660
+                  %p
+                    %img{:src => "assets/img/ic_skype.png"}>/
+                    OmnitoursColombia
+                %li.dropdown
+                  %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                    $COP
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li.dropdown-space-link
+                      %a{:href => "https://www.omnitours.com.co/"} COP Peso Colombiano
+                    %li
+                      %a{:href => "https://usd.omnitours.com.co/"} USD Dólar americano
+      %nav#slide-nav.navbar.navbar-inverse.navbar-fixed-top.hidden-sm.hidden-md.hidden-lg{:role => "navigation"}
+        .container
+          .navbar-header{:style => "right: 0px;"}
+            %a.navbar-toggle.slide
+              %span.sr-only Toggle navigation
+              %span.icon-bar.icon-bar1
+              %span.icon-bar.icon-bar2
+              %span.icon-bar.icon-bar3
+            %a.navbar-brand{:href => "https://www.omnitours.com.co/"}
+              %img#dnn_dnnLOGO_imgLogo{:alt => "::: OMNI TOURS COLOMBIA ::: Pone a Colombia en sus manos", :src => "assets/img/omnitours.png", :style => ""}/
+          #slidemenu{:style => "right: -999px;"}
+            %ul.nav.navbar-nav
+              %p.text-welcome-navbar Bienvenido
+              .divisor-navbar-text
+              %li
+                %a{:href => "index.html"} Inicio
+              %li{:style => "display: none;"}
+                %a{:href => ""} Destinos
+              %li{:style => "display: none;"}
+                %a{:href => "#"} Planes
+              %li{:style => "display: none;"}
+                %a{:href => "#"} Ofertas
+              %li
+                %a{:href => "https://reservas.omnitours.com.co/NetFulfillment/Login.aspx?UserService=omnitours&ContextApp=CMS&Culture=es-ES", :target => "_blank"} Mis reservas
+              %li.dropdown
+                %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                  $COP
+                  %span.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "https://www.omnitours.com.co/"} COP-Peso Colombiano
+                  %li
+                    %a{:href => "https://www.omnitours.com.co/usd"} USD-Dolar Estadounidense
+
+    %section.content
+      .fix-nav
+      %section.city
+        %section#filter-destinos
+          %h1.title-destino Descubre tu destino ideal en Colombia
+          %ul.portfolioFilter.filter-letter
+            %li
+              %a.current{"data-filter" => "*", :href => "#"} Todos
+            %li
+              %a{"data-filter" => ".a", :href => "#"} A
+            %li
+              %a{"data-filter" => ".b", :href => "#"} B
+            %li
+              %a{"data-filter" => ".c", :href => "#"} C
+            %li
+              %a{"data-filter" => ".d", :href => "#"} D
+            %li
+              %a{"data-filter" => ".e", :href => "#"} E
+            %li
+              %a{"data-filter" => ".f", :href => "#"} F
+            %li
+              %a{"data-filter" => ".g", :href => "#"} G
+            %li
+              %a{"data-filter" => ".h", :href => "#"} H
+            %li
+              %a{"data-filter" => ".i", :href => "#"} I
+            %li
+              %a{"data-filter" => ".j", :href => "#"} J
+            %li
+              %a{"data-filter" => ".k", :href => "#"} K
+            %li
+              %a{"data-filter" => ".l", :href => "#"} L
+            %li
+              %a{"data-filter" => ".m", :href => "#"} M
+            %li
+              %a{"data-filter" => ".n", :href => "#"} N
+            %li
+              %a{"data-filter" => ".ñ", :href => "#"} Ñ
+            %li
+              %a{"data-filter" => ".o", :href => "#"} O
+            %li
+              %a{"data-filter" => ".p", :href => "#"} P
+            %li
+              %a{"data-filter" => ".q", :href => "#"} Q
+            %li
+              %a{"data-filter" => ".r", :href => "#"} R
+            %li
+              %a{"data-filter" => ".s", :href => "#"} S
+            %li
+              %a{"data-filter" => ".t", :href => "#"} T
+            %li
+              %a{"data-filter" => ".u", :href => "#"} U
+            %li
+              %a{"data-filter" => ".v", :href => "#"} V
+            %li
+              %a{"data-filter" => ".w", :href => "#"} W
+            %li
+              %a{"data-filter" => ".x", :href => "#"} X
+            %li
+              %a{"data-filter" => ".y", :href => "#"} Y
+            %li
+              %a{"data-filter" => ".z", :href => "#"} Z
+
+        %section#box-images-destinos
+          .container-fluid
+            .row.portfolioContainer
+              - @destinations.each_with_index do |destination,index|
+                .col-xs-12.col-sm-12.col-md-12.col-lg-3{class: destination.filter_letter(destination.name)}
+                  %a{:href => "/destination/#{destination.slug}/cop"}
+                    .box-images
+                      %img.img-responsive{:src => destination.banner}
+                      .mask-box
+                        %span.title-box= destination.name
+
+    = render 'app/partials/footer'
+    :javascript
+      $(window).on('load', function(){
+          var $container = $('.portfolioContainer');
+          if ($container.length) {
+            $container.isotope({
+                filter: '*',
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+            $('.portfolioFilter a').click(function(){
+                $('.portfolioFilter .current').removeClass('current');
+                $(this).addClass('current');
+
+                var selector = $(this).attr('data-filter');
+                $container.isotope({
+                    filter: selector,
+                    animationOptions: {
+                        duration: 750,
+                        easing: 'linear',
+                        queue: false
+                    }
+                 });
+                 return false;
+            });
+          }
+      });

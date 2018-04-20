@@ -1,0 +1,52 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, Destination
+				= link_to admin_destination_path(@destination.id), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Destination
+				= link_to edit_admin_destination_path(@destination.id), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_destinations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%center
+					.color-title= @destination.name
+					.col.s6{style:'margin-top:30px'}
+						%center
+							= image_tag @destination.banner
+					.col.s6{style:'margin-top:30px'}
+						%center.fix-image
+							= image_tag @destination.cover , style:'width: 100%;margin-top:70px;margin-bottom:83px;'
+					.col.s12
+						.col.s6
+							.color-title Cover
+						.col.s6
+							.color-title Banner
+				%table.bordered
+					%tbody
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.id")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @destination.id
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.name")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @destination.name.blank? ? '----------' : @destination.name
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.subtitle")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @destination.subtitle.blank? ? '----------' : @destination.subtitle
+
+
+:scss
+	.fix-image{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 200px;
+	}

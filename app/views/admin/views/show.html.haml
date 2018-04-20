@@ -1,0 +1,61 @@
+= title(t('keppler.titles.show', model: "Views"))
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, View
+				= link_to admin_view_path(@view), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, View
+				= link_to edit_admin_view_path(@view), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_views_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%center
+					.color-title= @view.name
+					= image_tag @view.banner, style: "width: 80%;"
+				%table.bordered
+					%tbody
+						%tr
+							%th
+								.display-label URL
+							%td
+								= link_to "#{@view.get_url(@view, @request)}", @view.get_url(@view, @request), target: '_blank'
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.id")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.id.to_s.humanize
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.name")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.name.blank? ? '----------' : @view.name
+
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.month")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.month.blank? ? '----------' : @view.month
+
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.plan_ids")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.plan_ids.blank? ? '----------' : @view.plan_ids
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.hotel_ids")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.hotel_ids.blank? ? '----------' : @view.hotel_ids
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.excursion_ids")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.excursion_ids.blank? ? '----------' : @view.excursion_ids
+						%tr
+							%th
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.active")
+							%td
+								.display-value.fs-body-1.tc-black-2= @view.active.blank? ? '----------' : @view.active

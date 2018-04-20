@@ -1,0 +1,78 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, Plan
+				= link_to admin_destination_plan_path(@destination, @plan), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Plan
+				= link_to edit_admin_destination_plan_path(@destination, @plan), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_destination_plans_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%center
+					.color-title= @plan.title
+					= image_tag @plan.banner
+				%table.bordered
+					%tbody
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.id")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.id
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.title")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.title.blank? ? '----------' : @plan.title
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.price")
+							%td
+								%td.display-value.fs-body-1.tc-black-2
+									= @plan.price.blank? ? '----------' : "$#{@plan.price['cop']} COP / $#{@plan.price['usd']} USD"
+
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.url")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.url.blank? ? '----------' : "$#{@plan.url['cop']} /\n $#{@plan.url['usd']}"
+						%tr
+							%th
+								%th.display-label Destinos
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.destination_ids.blank? ? '----------' : @plan.destinations.map { |x| x.name}
+
+						%tr
+							%th
+								%th.display-label Duración
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.days.blank? ? '----------' : @plan.days
+						%tr
+							%th
+								%th.display-label Tipo de Duración
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.type_days.blank? ? '----------' : @plan.type_days
+
+						%tr
+							%th
+								%th.display-label Tipo de cupón seleccionado
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.type_coupons.blank? ? '----------' : @plan.type_coupons
+
+						%tr
+							%th
+								%th.display-label Descuento
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.coupon.blank? ? '----------' : "#{@plan.coupon}%"
+						%tr
+							%th
+								%th.display-label 2 x 1
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.offer.blank? ? '----------' : @plan.offer
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.plus")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @plan.plus.blank? ? '----------' : @plan.plus

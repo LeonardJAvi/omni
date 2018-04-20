@@ -1,0 +1,77 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, Excursion
+				= link_to admin_destination_excursion_path(@destination, @excursion), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Excursion
+				= link_to edit_admin_destination_excursion_path(@destination, @excursion), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_destination_excursions_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%center
+					.color-title= @excursion.title
+					= image_tag @excursion.banner
+				%table.bordered
+					%tbody
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.id")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.id
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.title")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.title.blank? ? '----------' : @excursion.title
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.price")
+							%td
+								%td.display-value.fs-body-1.tc-black-2
+									= @excursion.price.blank? ? '----------' : "$#{@excursion.price['cop']} COP / $#{@excursion.price['usd']} USD"
+
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.url")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.url.blank? ? '----------' : "$#{@excursion.url['cop']} /\n $#{@excursion.url['usd']}"
+						%tr
+							%th
+								%th.display-label Destino
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.destination.blank? ? '----------' : @excursion.destination.name
+
+						%th
+							%th.display-label Duración
+						%td
+							%td.display-value.fs-body-1.tc-black-2= @excursion.days.blank? ? '----------' : @excursion.days
+						%tr
+							%th
+								%th.display-label Tipo de Duración
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.type_days.blank? ? '----------' : @excursion.type_days
+
+						%tr
+							%th
+								%th.display-label Tipo de cupón seleccionado
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.type_coupons.blank? ? '----------' : @excursion.type_coupons
+
+						%tr
+							%th
+								%th.display-label Descuento
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.coupon.blank? ? '----------' : "#{@excursion.coupon}%"
+						%tr
+							%th
+								%th.display-label 2 x 1
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.offer.blank? ? '----------' : @excursion.offer
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.plus")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @excursion.plus.blank? ? '----------' : @excursion.plus

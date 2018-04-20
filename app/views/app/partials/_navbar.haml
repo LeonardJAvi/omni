@@ -1,0 +1,78 @@
+%nav.navbar.navbar-default.navbar-fixed-top.visible-sm.visible-md.visible-lg
+	.container
+		.container-fluid
+			.navbar-header{:style => "right: 80%;"}
+				%button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+					%span.sr-only Toggle navigation
+					%span.icon-bar
+					%span.icon-bar
+					%span.icon-bar
+				%a.navbar-brand{:href => "https://www.omnitours.com.co/"}
+					%img#dnn_dnnLOGO_imgLogo{:alt => "::: OMNI TOURS COLOMBIA ::: Pone a Colombia en sus manos", :src => "/assets/img/omnitours.png", :style => ""}/
+			#bs-example-navbar-collapse-1.collapse.navbar-collapse
+				%ul#list-price.nav.navbar-nav
+					%li
+						%p
+							%img{:src => "/assets/img/ic_telefono.png"}>/
+							(+571) 756 2614 / 805 6000
+						%p
+							%img{:src => "/assets/img/ic_whatsapp.png"}>/
+							(+57) 310 306 1660
+						%p
+							%img{:src => "/assets/img/ic_skype.png"}>/
+							OmnitoursColombia
+					%li.dropdown
+						%a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+							= "$#{@currency.upcase}" unless @destination.nil?
+							%span.caret
+						%ul.dropdown-menu
+							- if @destination.nil?
+								%li.dropdown-space-link
+									%a{:href => '/cop'} COP Peso Colombiano
+								%li
+									%a{:href => '/usd'} USD Dólar Americano
+							- else
+								%li.dropdown-space-link
+									%a{:href => destination_path(@destination.slug, 'cop')} COP Peso Colombiano
+								%li
+									%a{:href => destination_path(@destination.slug, 'usd')} USD Dólar Americano
+
+%nav#slide-nav.navbar.navbar-inverse.navbar-fixed-top.hidden-sm.hidden-md.hidden-lg{:role => "navigation"}
+	.container
+		.navbar-header{:style => "right: 0px;"}
+			%a.navbar-toggle.slide
+				%span.sr-only Toggle navigation
+				%span.icon-bar.icon-bar1
+				%span.icon-bar.icon-bar2
+				%span.icon-bar.icon-bar3
+			%a.navbar-brand{:href => "https://www.omnitours.com.co/"}
+				%img#dnn_dnnLOGO_imgLogo{:alt => "::: OMNI TOURS COLOMBIA ::: Pone a Colombia en sus manos", :src => "/assets/img/omnitours.png", :style => ""}/
+		#slidemenu{:style => "right: -999px;"}
+			%ul.nav.navbar-nav
+				%p.text-welcome-navbar Bienvenido
+				.divisor-navbar-text
+				%li
+					%a{:href => "index.html"} Inicio
+				%li{:style => "display: none;"}
+					%a{:href => ""} Destinos
+				%li{:style => "display: none;"}
+					%a{:href => "#"} Planes
+				%li{:style => "display: none;"}
+					%a{:href => "#"} Ofertas
+				%li
+					%a{:href => "https://reservas.omnitours.com.co/NetFulfillment/Login.aspx?UserService=omnitours&ContextApp=CMS&Culture=es-ES", :target => "_blank"} Mis reservas
+				%li.dropdown
+					%a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+						= "$#{@currency.upcase}" unless @destination.nil?
+						%span.caret
+					%ul.dropdown-menu
+						- if @destination.nil?
+							%li
+								%a{:href => 'cop'} COP Peso Colombiano
+							%li
+								%a{:href => 'usd'} USD Dólar Americano
+						- else
+							%li
+								%a{:href => destination_path(@destination.slug, 'cop')} COP Peso Colombiano
+							%li
+								%a{:href => destination_path(@destination.slug, 'usd')} USD Dólar Americano

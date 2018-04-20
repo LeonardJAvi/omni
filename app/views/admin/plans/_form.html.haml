@@ -1,0 +1,118 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_destination_plans_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.wrapper-inputs
+			.card
+				.card-content
+					= simple_form_for [:admin, @destination, @plan] do |f|
+						.row
+							.col.s12
+								= f.input :banner, :as => :file_material, label: false, wrapper_html: { class: "file-field" }
+							.col.s6
+								= f.input :title
+
+							- if !f.object.url.nil?
+								- f.object.url.each do |k,v|
+									.col.s3
+										.input-field.col.s12.string.required.plan_urls
+											%input.validate.string.required{id: "plan_url_#{k}", :name => "plan[url][#{k}]", :type => "text", :value => v}
+											%label.string.required.control-label{:for => "plan_urls"}= "Url #{k}"
+							- else
+								.col.s3
+									= f.simple_fields_for(:url) do |pr|
+										= pr.input :cop, label: t('plans.url.url_cop')
+								.col.s3
+									= f.simple_fields_for(:url) do |pr|
+										= pr.input :usd, label: t('plans.url.url_usd')
+
+							.col.s6{style:'margin-top:30px;'}
+								.color-title Días / Noches / Horas
+							.col.s6{style:'margin-top:30px;'}
+								.color-title Precio $COP / $USD
+
+							.col.s3
+								= f.input :days, label: 'Duración'
+							.col.s3{style: "margin-top: 14px;"}
+								= f.select :type_days, [['Días','Días'],['Noches','Noches'],['Horas','Horas']]
+							- if !f.object.price.nil?
+								- f.object.price.each do |k,v|
+									.col.s3
+										.input-field.col.s12.string.required.plan_prices
+											%input.validate.string.required{id: "plan_price_#{k}", :name => "plan[price][#{k}]", :type => "text", :value => v}
+											%label.string.required.control-label{:for => "plan_prices"}= "Price #{k}"
+							- else
+								.col.s3
+									= f.simple_fields_for(:price) do |pr|
+										= pr.input :cop, label: t('plans.price.price_cop')
+								.col.s3
+									= f.simple_fields_for(:price) do |pr|
+										= pr.input :usd, label: t('plans.price.price_usd')
+
+
+							.col.s6{style:'margin-top:30px;'}
+								- if action_name.eql?('edit')
+									= f.input :destination_ids, collection: Destination.all, input_html: { multiple: true }, label: 'Destinos'
+								- else
+									= f.input :destination_ids, collection: Destination.all, selected: @destination.id, input_html: { multiple: true }, label: 'Destinos'
+								= f.hidden_field :destination_id, value: @destination.id
+
+							.col.s12{style:'margin-top:30px;'}
+								.color-title{style: 'margin-bottom:20px;'} Escoge un tipo de Oferta
+								.col.s2{style:'margin-top:30px;'}
+									= f.collection_radio_buttons :type_coupons, [['descuento', 'Descuento'] ,['2x1', '2x1'], ['plus', 'Plus'], ['ninguno', 'Ninguno']],:first, :last
+
+								.col.s4#descuento
+									= f.input :coupon, label: 'Descuento'
+								.col.s4#2x1
+									= f.hidden_field :offer, value: '2x1', label: '2x1'
+								.col.s4#plus
+									= f.input :plus, label: 'Plus'
+
+							.col.s12
+								.form-actions.right
+									= f.button :submit, t("keppler.actions.save"), name: '_save'
+									= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
+
+:scss
+	.color-title{
+		font-size: 20px!important;
+		padding-left: 10px;
+	}
+
+
+:javascript
+
+	// $('#descuento').hide();
+	$('#2x1').hide();
+	$('#plus').hide();
+
+		$("input:radio").click(function (e) {
+			let value = e.target.value;
+
+			if (value == 'descuento'){
+				$('#descuento').show();
+				$('#2x1').hide();
+				$('#plus').hide();
+			}
+
+			else if (value == '2x1'){
+				$('#descuento').hide();
+				$('#2x1').show();
+				$('#plus').hide();
+			}
+
+			else if (value == 'plus'){
+				$('#descuento').hide();
+				$('#2x1').hide();
+				$('#plus').show();
+			}
+
+			else if (value == 'ninguno'){
+				$('#descuento').hide();
+				$('#2x1').hide();
+				$('#plus').hide();
+			}
+
+		});

@@ -1,0 +1,143 @@
+﻿
+.text-pre-excursiones {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #15a656;
+  position: relative;
+  top: -32px;
+  line-height: 30px;
+}
+.excursiones-icon-text img {
+  position: relative;
+  width: 30px;
+  top: -5px;
+}
+.excursiones-icon-text p {
+  color: #636361;
+  font-weight: bold;
+  line-height: 7px;
+  text-align: left;
+  padding-left: 25px;
+}
+.card-excursiones {
+  margin-bottom: 30px;
+  box-shadow: -8px 14px 23px -5px rgba(189,187,189,1);
+}
+.card-excursiones img {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+}
+.info-card {
+  padding: 0 15px;
+}
+.info-card-title {
+  font-weight: bold;
+  color: #12aa56;
+  margin-top: 10px;
+  font-size: 24px;
+}
+.info-card-days {
+color: #12aa56;
+font-size: 16px;
+}
+.info-card-content {
+  text-align: left;
+  font-size: 14px;
+}
+.info-card-reservas {
+  text-align: right;
+}
+.reservation-buttons {
+  display: none;
+}
+.card-excursiones .fa-chevron-down {
+  margin-right: 5px;
+  font-size: 14px;
+}
+.divisor-button-reservations {
+  border-top: 1px solid rgba(99, 99, 97, 0.32);
+  height: 1px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.reservation-buttons .fa-chevron-up {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.card-excursiones:hover .reservation-buttons {
+  display: initial;
+}
+.card-excursiones:hover .fa-chevron-down:before {
+  content: "\f077"
+}
+.reservation-buttons-mes {
+  font-weight: bold;
+  margin-bottom: 0px;
+  font-size: 13px;
+}
+.button-reserva-excursiones {
+  color: #636361;
+  border: 1.5px solid #636361;
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto;
+  width: 30%;
+  transition: .3s;
+  float: right;
+}
+.button-reserva-excursiones:hover {
+  background-color: #e6b90c;
+  color: #fff !important;
+  border: none;
+}
+.reservation-buttons-mes {
+  font-weight: bold;
+  margin-bottom: 0px;
+  font-size: 13px;
+}
+a{
+  color: transparent;
+  text-decoration: none !important;
+  outline: 0 !important;
+}
+.info-card-content{
+  padding-top: 10px;
+  font-size: 15px;
+  font-weight: normal;
+  color: #12a655 !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.clearfix{
+   clear: both;
+}
+
+
+
+.button-reserva-excursiones-view {
+ color: #636361;
+    border: 1.5px solid #636361;
+    padding: 6px 0px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
+    width: 60px;
+    transition: .3s;
+    float: right;
+    font-size: 10px;
+}
+
+
+.button-reserva-excursiones-view:hover {
+    background-color: #e6b90c;
+    color: #fff !important;
+    border: none;
+}
+
+.item-view-date{
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}

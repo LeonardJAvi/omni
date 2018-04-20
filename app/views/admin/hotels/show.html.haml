@@ -1,0 +1,78 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, Hotel
+				= link_to admin_destination_hotel_path(@destination, @hotel), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Hotel
+				= link_to edit_admin_destination_hotel_path(@destination, @hotel), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_destination_hotels_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%center
+					.color-title= @hotel.title
+					= image_tag @hotel.banner
+				%table.bordered
+					%tbody
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.id")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.id
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.title")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.title.blank? ? '----------' : @hotel.title
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.price")
+							%td
+								%td.display-value.fs-body-1.tc-black-2
+									= @hotel.price.blank? ? '----------' : "$#{@hotel.price['cop']} COP / $#{@hotel.price['usd']} USD"
+
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.url")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.url.blank? ? '----------' : "$#{@hotel.url['cop']} /\n $#{@hotel.url['usd']}"
+						%tr
+							%th
+								%th.display-label Destino
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.destination.blank? ? '----------' : @hotel.destination.name
+
+						%tr
+							%th
+								%th.display-label Duración
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.days.blank? ? '----------' : @hotel.days
+						%tr
+							%th
+								%th.display-label Tipo de Duración
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.type_days.blank? ? '----------' : @hotel.type_days
+
+						%tr
+							%th
+								%th.display-label Tipo de cupón seleccionado
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.type_coupons.blank? ? '----------' : @hotel.type_coupons
+
+						%tr
+							%th
+								%th.display-label Descuento
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.coupon.blank? ? '----------' : "#{@hotel.coupon}%"
+						%tr
+							%th
+								%th.display-label 2 x 1
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.offer.blank? ? '----------' : @hotel.offer
+						%tr
+							%th
+								%th.display-label= t("activerecord.attributes.plus")
+							%td
+								%td.display-value.fs-body-1.tc-black-2= @hotel.plus.blank? ? '----------' : @hotel.plus

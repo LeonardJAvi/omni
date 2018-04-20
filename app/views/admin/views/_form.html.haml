@@ -1,0 +1,46 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_views_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.wrapper-inputs
+			.card
+				.card-content
+					= simple_form_for [:admin, @view] do |f|
+						.row
+							.col.s12
+								= f.input :banner, :as => :file_material, label: false, wrapper_html: { class: "file-field" }
+							-# - if action_name.eql?('edit')
+							-# 	= f.input :name, disabled: true
+							-# - else
+							= f.input :name
+							= f.input :subtitle
+							= f.input :active, as: :checkbox_material
+						.row{style:'margin-top:30px;'}
+							.col.s6
+								- if action_name.eql?('edit')
+									= f.input :plan_ids, collection: Plan.all, input_html: { multiple: true }, label: 'Planes'
+								- else
+									= f.input :plan_ids, collection: Plan.all, selected: Plan.first, input_html: { multiple: true }, label: 'Planes'
+							.col.s6
+								- if action_name.eql?('edit')
+									= f.input :excursion_ids, collection: Excursion.all, input_html: { multiple: true }, label: 'Actividades'
+								- else
+									= f.input :excursion_ids, collection: Excursion.all, selected: Excursion.first, input_html: { multiple: true }, label: 'Actividades'
+
+
+						.row{style:'margin-top:30px;'}
+							.col.s6
+								- if action_name.eql?('edit')
+									= f.input :hotel_ids, collection: Hotel.all, input_html: { multiple: true }, label: 'Hoteles'
+								- else
+									= f.input :hotel_ids, collection: Hotel.all, selected: Plan.first, input_html: { multiple: true }, label: 'Hoteles'
+							.col.s6
+								= f.input :month, collection: View.month_all, input_html: { multiple: true }
+
+						.row{style:'margin-top:50px;'}
+
+
+							.form-actions.right
+								= f.button :submit, t("keppler.actions.save"), name: '_save'
+								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'

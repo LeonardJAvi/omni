@@ -1,0 +1,225 @@
+!!!
+%html{:lang => "en"}
+	= render 'app/partials/head'
+	%body
+
+		%section#spinner-omnitours
+			.content-spinner
+				%img.logo-load{:src => "/assets/img/load_omnitours.png"}/
+				%img.omni-logo-load{:src => "/assets/img/logotipo.png"}/
+				%p.title-payment PAGA SEGURO
+				%p.title-methods CON CUALQUIERA DE ESTOS MEDIOS
+				%img.methods-payment{:src => "/assets/img/logos_bank"}/
+				
+		#content-ready.hidden
+			%header
+				= render 'app/partials/navbar'
+
+			%section#spinner
+				%section.content
+					.fix-nav
+					%section#cover-image
+						.container-fluid
+							.row
+								.col-xs-12.col-sm-12.col-md-12
+									.cover-city
+										%img.img-responsive{:src => @destination.cover}/
+										.mask-cover-city
+											%h1.title-cover-city= @destination.name
+											.info-cover-city
+												%span.info-cover-city= @destination.subtitle
+												
+					%section#planes
+						.container-fluid
+							.col-xs-12.col-sm-12.col-md-12.col-lg-12
+								.box-select
+									.select-items
+										.col-sm-12.col-md-12.col-lg-12.box-item-filter#line-r.hidden-xs
+											#box-check
+												%h5.item Selecciona tu mejor opción
+												#box-check-item-destination.form-group
+													.col-xs-12.col-sm-12.col-md-12.col-lg-12
+														#items-select.filters
+															/ %label.checkbox-inline.hidden-lg
+															.check-input
+																%input#todos.filter-check{:name => "todos", :type => "checkbox", :value => ".element-item"}/
+																.icon-item-filter#icon-todos
+																%span.item-input Todos
+															.check-input
+																%input#pln.active.filter-check{:name => "plan", :type => "checkbox", :value => ".plan"}/
+																.icon-item-filter#icon-planes
+																%span.item-input Planes
+															.check-input
+																.icon-item-filter#icon-hoteles
+																%input#htl.active.filter-check{:name => "hotel", :type => "checkbox", :value => ".hotel"}/
+																%span.item-input Hoteles
+															.check-input
+																%input#atc.active.filter-check{:name => "actividad", :type => "checkbox", :value => ".actividad"}/
+																.icon-item-filter#icon-actividades
+																%span.item-input Actividades
+										.col-xs-12.col-sm-12.filter.clearfix.visible-xs
+											.filter-mobile.fix-desti
+												.container
+													.row
+														.col-xs-12.col-sm-12
+															.input-group
+																.input-group-btn
+																	%button.btn.btn-secondary.dropdown-toggle.dropdown-toggle-split.fix-btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", :class => "button-filter"}
+																		%span.label-icon Selecciona tu mejor opción
+																		%span.caret  
+																	.dropdown-menu.dropdown-menu-right.tap.fix-menu-mobile
+																		%ul.category_filters
+																			%li.list-item
+																				.icon-item-filter#icon-todos
+																				%input#todos.filter-check{:name => "todos", :type => "checkbox", :value => ".element-item"}/
+																				%label{:for => "todos"} Todos
+																			%li.list-item
+																				.icon-item-filter#icon-planes
+																				%input#pln.active.filter-check{:name => "plan", :type => "checkbox", :value => ".plan"}/
+																				%label.category-label{:for => "plan"} Planes
+																			%li.list-item
+																				.icon-item-filter#icon-hoteles
+																				%input#htl.active.filter-check{:name => "hotel", :type => "checkbox", :value => ".hotel"}/
+																				%label.category-label{:for => "hotel"} Hoteles
+																			%li.list-item
+																				.icon-item-filter#icon-actividades
+																				%input#atc.active.filter-check{:name => "actividad", :type => "checkbox", :value => ".actividad"}/
+																				%label.category-label{:for => "actividad"} Actividades
+
+								.grid
+									- @plans.each do |plan|
+										.col-xs-12.col-sm-6.col-md-6.col-lg-3.card-show.element-item.plan
+											.box-card
+												.card
+													.card-image
+														%img.img-responsive{:src => !plan.banner ? "/assets/img/destino.jpg" : plan.banner}/
+														- if plan.type_coupons.eql?('descuento')
+															.offers
+																%span.item-offer= "#{plan.type_coupons.capitalize if !plan.type_coupons.nil?}"
+															.discounts
+																%span.item-discount= "-#{plan.coupon}%"
+														- elsif plan.type_coupons.eql?('2x1')
+															.offers
+																%span.item-offer= "#{plan.offer}"
+														- elsif plan.type_coupons.eql?('plus')
+															.offers
+																%span.item-offer= "#{plan.plus}"
+														.icon-item-img
+															.icon-item-image
+																= image_tag 'img/planes.svg', class: 'img-responsive'
+													.card-content
+														.col-xs-12.col-sm-12.col-md-12.col-lg-12.fix
+															.box-text
+																%span.card-title= plan.title
+															- if plan.days.blank?
+																%span.item-card= "#{@currency.upcase} #{number_to_currency(plan.price["#{@currency}"], precision: 0, delimiter: ".")}"
+															-else
+																- if plan.days.eql?("1")
+																	%span.item-card= "#{plan.days} #{plan.singularize_string(plan.type_days)} |" << " #{@currency.upcase} #{number_to_currency(plan.price["#{@currency}"], precision: 0, delimiter: ".")}"
+																- else
+																	%span.item-card.pull-left= "#{plan.days} #{plan.type_days}"
+																	%span.item-card.pull-right.fix-item-card= "#{@currency.upcase} #{number_to_currency(plan.price["#{@currency}"], precision: 0, delimiter: ".")}"
+														.col-xs-12.col-sm-12.col-md-12.col-lg-12.fix
+															.box-button
+																%a{:href => plan.url["#{@currency}"], :target => "_blank", :class => "link-reservar"}
+																	%p.button-reserva-excursiones Ver más
+																.clearfix
+														.clearfix
+
+									- @hotels.each do |hotel|
+										.col-xs-12.col-sm-6.col-md-6.col-lg-3.card-show.element-item.hotel
+											.box-card
+												.card
+													.card-image
+														%img.img-responsive{:src => !hotel.banner ? "/assets/img/destino.jpg" : hotel.banner}
+														- if hotel.type_coupons.eql?('descuento')
+															.offers
+																%span.item-offer= "#{hotel.type_coupons.capitalize if !hotel.type_coupons.nil?}"
+															.discounts
+																%span.item-discount= "-#{hotel.coupon}%"
+
+														- elsif hotel.type_coupons.eql?('2x1')
+															.offers
+																%span.item-offer= "#{hotel.offer}"
+														- elsif hotel.type_coupons.eql?('plus')
+															.offers
+																%span.item-offer= "#{hotel.plus}"
+														.icon-item-img
+															.icon-item-image
+																= image_tag 'img/hoteles.svg', class: 'img-responsive'
+													.card-content
+														.col-xs-12.col-sm-12.col-md-12.col-lg-12.fix
+															.box-text
+																%span.card-title= hotel.title
+															- if hotel.days.blank?
+																%span.item-card= "#{@currency.upcase} #{number_to_currency(hotel.price["#{@currency}"], precision: 0, delimiter: ".")}"
+															-else
+																- if hotel.days.eql?("1")
+																	%span.item-card= "#{hotel.days} #{hotel.singularize_string(hotel.type_days)} " << " #{@currency.upcase} #{number_to_currency(hotel.price["#{@currency}"], precision: 0, delimiter: ".")}"
+																- else
+																	%span.item-card.pull-left= "#{hotel.days} #{hotel.type_days}"
+																	%span.item-card.pull-right.fix-item-card= "#{@currency.upcase} #{number_to_currency(hotel.price["#{@currency}"], precision: 0, delimiter: ".")}"
+														.col-xs-12.col-sm-12.col-md-12.col-lg-12.fix
+															.box-button
+																%a{:href => hotel.url["#{@currency}"], :target => "_blank", :class => "link-reservar"}
+																	%p.button-reserva-excursiones Ver más
+																.clearfix
+														.clearfix
+
+									- @activities.each do |activity|
+										.col-xs-12.col-sm-6.col-md-6.col-lg-3.card-show.element-item.actividad
+											.box-card
+												.card
+													.card-image
+														%img.img-responsive{:src => !activity.banner ? "/assets/img/destino.jpg" : activity.banner}
+
+														- if activity.type_coupons.eql?('descuento')
+															.offers
+																%span.item-offer= "#{activity.type_coupons.capitalize if !activity.type_coupons.nil?}"
+															.discounts
+																%span.item-discount= "-#{activity.coupon}%"
+														- elsif activity.type_coupons.eql?('2x1')
+															.offers
+																%span.item-offer= "#{activity.offer}"
+														- elsif activity.type_coupons.eql?('plus')
+															.offers
+																%span.item-offer= "#{activity.plus}"
+														.icon-item-img
+															.icon-item-image
+																= image_tag 'img/actividades.svg', class: 'img-responsive'
+													.card-content
+														.col-xs-12.col-sm-12.col-md-12.col-lg-12.fix
+															.box-text
+																%span.card-title= activity.title
+															- if activity.days.blank?
+																%span.item-card= "#{@currency.upcase} #{number_to_currency(activity.price["#{@currency}"], precision: 0, delimiter: ".")}"
+															-else
+																- if activity.days.eql?("1")
+																	%span.item-card= "#{activity.days} #{activity.singularize_string(activity.type_days)} |" << " #{@currency.upcase} #{number_to_currency(activity.price["#{@currency}"], precision: 0, delimiter: ".")}"
+																- else
+																	%span.item-card.pull-left= "#{activity.days} #{activity.type_days}"
+																	%span.item-card.pull-right.fix-item-card= "#{@currency.upcase} #{number_to_currency(activity.price["#{@currency}"], precision: 0, delimiter: ".")}"
+														.col-xs-12.col-sm-12.col-md-12.col-lg-12.fix
+															.box-button
+																%a{:href => activity.url["#{@currency}"], :target => "_blank", :class => "link-reservar"}
+																	%p.button-reserva-excursiones Ver más
+																.clearfix
+														.clearfix
+						
+						#back-destinations
+							= link_to root_path, :class=> 'pulse custom-tooltip', data: { placement: 'top', toggle: 'tooltip', original_title: 'Ver más destinos...' } do
+								%span
+									%i.fa.fa-arrow-circle-left.fa-3x{"aria-hidden" => "true"}
+
+			= render 'app/partials/footer'
+
+		:javascript
+
+			$(document).ready(function() {
+				$('[data-toggle="tooltip"]').tooltip();
+				$('.dropdown-toggle').dropdown();
+				setTimeout(function() {
+					$('#spinner-omnitours').fadeOut().remove();
+					$('#content-ready').fadeIn().removeClass('hidden');
+				}, 300);;
+			});
